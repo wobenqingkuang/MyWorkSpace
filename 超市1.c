@@ -78,7 +78,7 @@ void fscanf1_goods(FILE *fp,int n,struct GOODS *goods)//读取文件函数
 		fscanf(fp,"%s",goods[i].name,goods[i].mfrs,goods[i].buyer,goods[i].beizhu);
 	}
 }
-void fprintf1_goods(FILE *fp,int n,struct GOODS *goods)
+void fprintf1_goods(FILE *fp,int n,struct GOODS *goods)//把结构体GOODS写入文件
 {
 		int i;
 	for(i=0;i<n;i++)
@@ -87,15 +87,7 @@ void fprintf1_goods(FILE *fp,int n,struct GOODS *goods)
 		fprintf(fp,"%s\n",goods[i].name,goods[i].mfrs,goods[i].buyer,goods[i].beizhu);
 	}
 }
-/*struct GOODS1
-{
-	int num;
-	char name[30];
-	int price;
-	int amount;
-	int allprice;
-}allsell[100];*/
-void fprintf2_goods(FILE *fp,int n,struct GOODS1 *goods)
+void fprintf2_goods(FILE *fp,int n,struct GOODS1 *goods)//把结构体GOODS1写入文件
 {
 		int i;
 	for(i=0;i<n;i++)
@@ -104,7 +96,7 @@ void fprintf2_goods(FILE *fp,int n,struct GOODS1 *goods)
 		fprintf(fp,"%s\n",goods[i].name,goods[i]);
 	}
 }
-void fscanf2_goods(FILE *fp,int n,struct GOODS1 *goods)//读取文件函数
+void fscanf2_goods(FILE *fp,int n,struct GOODS1 *goods)//读取文件函数到GOODS1
 {
 	int i;
 	for(i=0;i<n;i++)
@@ -113,7 +105,7 @@ void fscanf2_goods(FILE *fp,int n,struct GOODS1 *goods)//读取文件函数
 		fscanf(fp,"%s\n",goods[i].name,goods[i]);
 	}
 }
-void goods_add(void) 
+void goods_add(void) //增加商品
 { int n; 
 FILE *fp;
 fp=fopen("goods.txt","a+");
@@ -142,7 +134,7 @@ quan++;
  fclose(fp);
 return_confirm();
 }
-void goods_del()
+void goods_del()//删除商品
 {
 	FILE *fp;
 	int n,num,i,amount;
@@ -180,7 +172,7 @@ else if(amount=goods[n].amount)
 fprintf1_goods(fp,100,goods);
 return_confirm();
 }
-void goods_search()
+void goods_search()//商品查询
 { 
 	FILE *fp;
 	int n,i=1,j=0;
@@ -204,7 +196,7 @@ fscanf1_goods(fp,100,goods);
    fclose(fp);
 return_confirm();
 }
-void goods_sell() 
+void goods_sell() //商品查询
 {	
    FILE *fp,*fp1;
    int sum=0,n=1,k,num,money,i,j=0;
@@ -248,7 +240,7 @@ void goods_sell()
 	fclose(fp1);
 }
 
-void goods_change()
+void goods_change()//商品修改
 {
 	int n,i;
 	FILE *fp;
@@ -278,7 +270,7 @@ fscanf1_goods(fp,100,goods);
 fprintf1_goods(fp,100,goods);
 fclose(fp);
 }  
-void goods_information()
+void goods_information()//商品信息管理界面
 {
 menu:page_title("商品信息管理");
 	printf("1. 添加商品 \t\t2. 删除商品\n");
@@ -294,7 +286,7 @@ menu:page_title("商品信息管理");
 		case '6' :	exit(0);
 	 }goto menu;
 }
-void seller_menu()
+void seller_menu()//收银员操作菜单界面
 {
 menu:page_title("收银员操作菜单");
 	printf("1. 商品信息管理 \t\t2. 商品销售\n");
@@ -310,7 +302,7 @@ menu:page_title("收银员操作菜单");
 		
 	 }goto menu;
 }
-void seller1_denglu()
+void seller1_denglu()//收银员登陆
 {
 	int n,m,i,num;
 page_title("收银员登录");
@@ -335,7 +327,7 @@ seller_menu();
 }
 
 
-void charger_denglu()
+void charger_denglu()//管理员登录
 {
 	int n,m;
 	printf("请输入账号：数字账号:");
@@ -353,7 +345,7 @@ void charger_denglu()
 		charger_denglu();
 	}
 }
-void sell_record()
+void sell_record()//出售商品查询
 {
 	FILE * fp;
 	int i;
@@ -374,7 +366,7 @@ void sell_record()
 	fclose(fp);
 return_confirm();
 }
-void denglu()
+void denglu()//登录界面
 {
 menu:page_title("登录界面");
 	 printf("1,收银员登录\t\t2,管理员登录\n");
@@ -388,7 +380,7 @@ menu:page_title("登录界面");
 	 goto menu;
 }
 //1.用户资料打印 2.添加用户 3.删除用户 4.修改用户权限 5退出"
-void manner_denglu()
+void manner_denglu()//系统管理员界面
 {
 	FILE *fp;
 	menu:page_title("系统管理员界面");
@@ -408,7 +400,7 @@ void manner_denglu()
 	    case '6' :	exit(0);
 	 }goto menu;
 }
-void seller_change()
+void seller_change()//修改用户权限
 	{
 	FILE *fp;
 	int num,m=1,n,i;
@@ -448,7 +440,7 @@ void seller_change()
 	fwrite(ren,sizeof(struct SHOP),10,fp);
 }
 int t=0;
-void seller_add()
+void seller_add()//增加收银员
 {	
 	
 	int i,n;
@@ -474,7 +466,7 @@ void seller_add()
 	fclose(fp);
 }
 //用户的账号、密码、角色、权限等信息。
-void seller_put()
+void seller_put()//查询收银员信息
 {
 	int n,i;
 	printf("输入用户账号");
@@ -487,7 +479,7 @@ void seller_put()
 		}
 	}
 }
-void seller_del()
+void seller_del()//删除销售员
 {
 	
 	int n,num,i;
