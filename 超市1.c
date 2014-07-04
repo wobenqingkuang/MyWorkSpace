@@ -79,7 +79,7 @@ void fscanf2_goods(FILE *fp,int n,struct GOODS1 *goods)//读取文件函数到GOODS1
 	for(i=0;i<n;i++)
 	{
 		fscanf(fp,"%d\t%d\t%d\n",goods[i].num,goods[i].price,goods[i].amount);
-		fscanf(fp,"%s\t%s\n",goods[i].name,goods[i].allprice);
+		fscanf(fp,"%s\t%d\n",goods[i].name,goods[i].allprice);
 	}
 }
 void fscanf3_goods(FILE *fp,int n,struct SHOP *goods)//读取文件函数
@@ -108,7 +108,7 @@ void fprintf2_goods(FILE *fp,int n,struct GOODS1 *goods)//把结构体GOODS1写入文件
 	for(i=0;i<n;i++)
 	{
 		fprintf(fp,"%d\t%d\t%d\n",goods[i].num,goods[i].price,goods[i].amount);
-		fprintf(fp,"%s\t%s\n",goods[i].name,goods[i].allprice);
+		fprintf(fp,"%s\t%d\n",goods[i].name,goods[i].allprice);
 	}
 }
 void fprintf3_goods(FILE *fp,int n,struct SHOP *goods)//读取文件函数
@@ -243,9 +243,7 @@ void goods_sell() //商品售出
  fclose(fp);
 	fclose(fp1);
 	fclose(fp2);
- fp=fopen("goods_sell.txt","w");
-	fp1=fopen("goods.txt","w");
-	fp2=fopen("quanj.txt","w");
+ 
    for(k=0;n!=0;k++)
    {
 	   printf("请输入所要售出商品的编号：");
@@ -273,10 +271,12 @@ void goods_sell() //商品售出
    printf("请输入付款：");
    scanf("%d",&money);
    printf("找零：%d\n",money-sum);
-   
-   fprintf(fp2,"%d\n%d\n%d\n",quan,shouchu,ren1);
+   fp=fopen("goods_sell.txt","w");
+	fp1=fopen("goods.txt","w");
+	fp2=fopen("quanj.txt","w");
    fprintf1_goods(fp1,quan,goods);
-   fprintf2_goods(fp,shouchu,allsell);
+ fprintf2_goods(fp,shouchu,allsell);
+ fprintf(fp2,"%d\n%d\n%d\n",quan,shouchu,ren1);
    fclose(fp);
 	fclose(fp1);
 	fclose(fp2);
